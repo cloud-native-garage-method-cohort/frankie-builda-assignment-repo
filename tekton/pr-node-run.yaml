@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: node-s2i-pipeline-run-
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: node-s2i-pipeline
+  workspaces:
+    - name: express-app-pipeline-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
